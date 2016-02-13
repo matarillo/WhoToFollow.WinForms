@@ -28,20 +28,19 @@ namespace WhoToFollowApp
             display.Clear();
             for (var i = 0; i < 3; i++)
             {
-                dynamic user = users[random.Next(users.Count)];
-                this.SuggestedPeople.Add(new PersonToFollow
-                {
-                    Name = (string)user.login,
-                    Url = new Uri((string)user.html_url),
-                    Image = new Uri((string)user.avatar_url)
-                });
+                this.SuggestedPeople.Add(PickupRandomlyFrom(users));
             }
         }
 
         public void CloseOne(object sender, CloseEventArgs e)
         {
+            this.SuggestedPeople[e.Index] = PickupRandomlyFrom(users);
+        }
+
+        private PersonToFollow PickupRandomlyFrom(IList<JToken> users)
+        {
             dynamic user = users[random.Next(users.Count)];
-            this.SuggestedPeople[e.Index] = new PersonToFollow
+            return new PersonToFollow
             {
                 Name = (string)user.login,
                 Url = new Uri((string)user.html_url),
