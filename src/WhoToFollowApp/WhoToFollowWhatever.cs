@@ -28,13 +28,13 @@ namespace WhoToFollowApp
             display.Clear();
             for (var i = 0; i < 3; i++)
             {
-                this.SuggestedPeople.Add(PickupRandomlyFrom(users));
+                display.Add(PickupRandomlyFrom(users));
             }
         }
 
         public void CloseOne(object sender, CloseEventArgs e)
         {
-            this.SuggestedPeople[e.Index] = PickupRandomlyFrom(users);
+            display[e.Index] = PickupRandomlyFrom(users);
         }
 
         private PersonToFollow PickupRandomlyFrom(IList<JToken> users)
